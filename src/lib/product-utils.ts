@@ -211,3 +211,70 @@ export function parseFilters(sp: Record<string, string | string[] | undefined>):
     inStock: sp.inStock === "1" || sp.inStock === "true",
   };
 }
+
+/**
+ * Converts product description content (HTML or plain text with markdown/bullets)
+ * into semantic HTML with proper paragraphs, bullet points, numbered lists, and bold text.
+ */
+export function formatRichDescription(content?: string | null): string {
+  if (!content) return "";
+
+  // If already contains HTML markup (from rich text editor or manual tags)
+  if (/<[a-z][\s\S]*>/i.test(content)) {
+    return content;
+  }
+
+  // Parse plain text with markdown-style bold and bullet points
+  const lines = content.split(/\r?\n/);
+  const result: string[] = [];
+  let currentList: "ul" | "ol" | null = null;
+
+  for (let i = 0; i < lines.length; i++) {
+    const rawLine = lines[i];
+    const trimmed = rawLine.trim();
+
+    if (!trimmed) {
+      if (currentList) {
+        result.push(currentList === "ul" ? "</ul>" : "</ol>");
+        currentList = null;
+      }
+      continue;
+    }
+
+    // Convert markdown bold **text** to <strong>text</strong>
+    const formattedLine = trimmed.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+    // Bullet points: •, -, *
+    const bulletMatch = formattedLine.match(/^([•\-\*])\s+(.+)$/);
+    // Numbered list: 1., 2., etc.
+    const numberedMatch = formattedLine.match(/^(\d+[\.\)])\s+(.+)$/);
+
+    if (bulletMatch) {
+      if (currentList !== "ul") {
+        if (currentList) result.push("</ol>");
+        result.push("<ul>");
+        currentList = "ul";
+      }
+      result.push(`<li>${bulletMatch[2]}</li>`);
+    } else if (numberedMatch) {
+      if (currentList !== "ol") {
+        if (currentList) result.push("</ul>");
+        result.push("<ol>");
+        currentList = "ol";
+      }
+      result.push(`<li>${numberedMatch[2]}</li>`);
+    } else {
+      if (currentList) {
+        result.push(currentList === "ul" ? "</ul>" : "</ol>");
+        currentList = null;
+      }
+      result.push(`<p>${formattedLine}</p>`);
+    }
+  }
+
+  if (currentList) {
+    result.push(currentList === "ul" ? "</ul>" : "</ol>");
+  }
+
+  return result.join("");
+}
