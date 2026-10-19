@@ -9,6 +9,7 @@ import ProductCollectionsField from "@/components/admin/ProductCollectionsField"
 import ProductImagesField from "@/components/admin/ProductImagesField";
 import ProductSizesField from "@/components/admin/ProductSizesField";
 import TextAreaField from "@/components/admin/TextAreaField";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 import FormField from "@/components/auth/FormField";
 import SubmitButton from "@/components/auth/SubmitButton";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -299,12 +300,12 @@ export default function ProductForm({ product, categories, subcategories, collec
         <p className="font-lato text-xs text-gray-text">
           All fields are pre-filled with standard Rudraksha Antiquei copy — edit anything product-specific.
         </p>
-        <TextAreaField
+        <RichTextEditor
           label="Description"
           name="description"
           defaultValue={product?.description ?? ""}
-          required
           errors={state?.errors?.description}
+          helperText="Format with bold, bullet points, numbered lists, headings, etc. You can also paste directly from Google Docs or Word."
         />
         <TextAreaField
           label="Shipping Info"

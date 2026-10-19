@@ -10,7 +10,7 @@ import { useCurrency } from "@/components/CurrencyProvider";
 import { useCart } from "@/components/CartProvider";
 import { useWishlist } from "@/components/WishlistProvider";
 import QuantityStepper from "@/components/ui/QuantityStepper";
-import { getMainImage } from "@/lib/product-utils";
+import { getMainImage, formatRichDescription } from "@/lib/product-utils";
 import type { getProductBySlug } from "@/lib/products";
 
 type Product = NonNullable<Awaited<ReturnType<typeof getProductBySlug>>>;
@@ -471,7 +471,19 @@ export default function ProductDetailMain({ product }: { product: Product }) {
                     {sec.title}
                     {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                   </button>
-                  {isOpen && <p className="font-lato text-sm text-gray-text mt-3 mb-0 leading-relaxed">{sec.content}</p>}
+                  {isOpen && (
+                    <div
+                      className="font-lato text-sm text-gray-text mt-3 mb-0 leading-relaxed
+                        [&_p]:my-2.5 [&_p:first-child]:mt-0 [&_p:last-child]:mb-0
+                        [&_strong]:font-bold [&_strong]:text-dark
+                        [&_b]:font-bold [&_b]:text-dark
+                        [&_em]:italic [&_i]:italic
+                        [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2.5
+                        [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2.5
+                        [&_li]:my-1 [&_li]:leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: formatRichDescription(sec.content) }}
+                    />
+                  )}
                 </div>
               );
             })}

@@ -14,10 +14,33 @@ function isValidSrc(url: string): boolean {
 }
 
 // Extract Cloudinary public ID from a full secure_url
-// e.g. https://res.cloudinary.com/dxyz/image/upload/v123/Rudraksh/abc.jpg → Rudraksh/abc
+// Handles both plain URLs and URLs with transformation params (e.g. /upload/f_auto,q_auto,w_1600,c_limit/v123/Rudraksh/abc.jpg)
 function toPublicId(url: string): string {
-  const match = url.match(/\/upload\/(?:v\d+\/)?(.+?)(?:\.[a-zA-Z0-9]+)?$/);
-  return match ? match[1] : url;
+  if (!url || typeof url !== "string") return "";
+  if (!url.includes("/upload/")) return url;
+
+  const afterUpload = url.split("/upload/")[1];
+  if (!afterUpload) return url;
+
+  const segments = afterUpload.split("/");
+  let i = 0;
+  while (i < segments.length) {
+    const seg = segments[i];
+    // Check if segment is version (e.g. v1791625210 or v1)
+    if (/^v\d+$/.test(seg)) {
+      i++;
+      break;
+    }
+    // Check if segment is transformation parameters (e.g. f_auto,q_auto,w_1600,c_limit)
+    if (seg.includes(",") || /^[a-z]{1,3}_/.test(seg)) {
+      i++;
+      continue;
+    }
+    break;
+  }
+
+  const remaining = segments.slice(i).join("/");
+  return remaining.replace(/\.[a-zA-Z0-9]+$/, "");
 }
 
 interface SmartImageProps {
