@@ -22,47 +22,59 @@ const prata = Prata({
   weight: "400",
 });
 
-const getBaseUrl = () => {
-  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL)
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return "http://localhost:3000";
-};
 
-const baseUrl = getBaseUrl();
+
+import { getOrganizationSchema, getWebSiteSchema, SITE_URL, PRIMARY_KEYWORDS } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
-    template: "%s | Rudraksha Antique",
-    default: "Rudraksha Antique | Premium Healing & Spiritual Jewelry",
+    template: "%s | Rudraksha Antiquei",
+    default: "Rudraksha Antiquei | 100% Original Nepali Rudraksha & Certified Vedic Gemstones",
   },
   description:
-    "Discover authentic, premium quality Rudraksha beads, healing crystals, and spiritual jewelry. Certified and energized for your spiritual journey.",
+    "Buy 100% original, lab-certified Nepali Rudraksha beads (1-21 Mukhi), Vedic energized Siddha Malas, 108 Japa Malas, and untreated astrological gemstones. Consecrated with authentic Prana Pratishtha rituals in Rishikesh.",
+  keywords: PRIMARY_KEYWORDS,
+  authors: [{ name: "Rudraksha Antiquei", url: SITE_URL }],
+  creator: "Rudraksha Antiquei",
+  publisher: "Rudraksha Antiquei",
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: baseUrl,
-    siteName: "Rudraksha Antique",
-    title: "Rudraksha Antique | Premium Healing & Spiritual Jewelry",
+    url: SITE_URL,
+    siteName: "Rudraksha Antiquei",
+    title: "Rudraksha Antiquei | 100% Original Nepali Rudraksha & Certified Vedic Gemstones",
     description:
-      "Discover authentic, premium quality Rudraksha beads and spiritual jewelry.",
+      "Buy 100% original, lab-certified Nepali Rudraksha beads, Vedic energized Siddha Malas, and untreated gemstones. Consecrated on the banks of Ganga in Rishikesh.",
     images: [
       {
         url: "/assets/images/og-default.webp",
         width: 1200,
         height: 630,
-        alt: "Rudraksha Antique Store",
+        alt: "Rudraksha Antiquei - Original Nepali Rudraksha & Vedic Gemstones Store in Rishikesh",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rudraksha Antique | Premium Healing & Spiritual Jewelry",
+    title: "Rudraksha Antiquei | 100% Original Nepali Rudraksha & Certified Vedic Gemstones",
     description:
-      "Discover authentic, premium quality Rudraksha beads and spiritual jewelry.",
+      "Buy 100% original, lab-certified Nepali Rudraksha beads, Vedic energized Siddha Malas, and untreated gemstones. Consecrated in Rishikesh.",
     images: ["/assets/images/og-default.webp"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -71,12 +83,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const orgSchema = getOrganizationSchema();
+  const websiteSchema = getWebSiteSchema();
+
   return (
     <html
       lang="en"
       className={`${lato.variable} ${prata.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body suppressHydrationWarning>
         <SessionProviderWrapper>
           <CurrencyProvider>
@@ -95,3 +120,4 @@ export default function RootLayout({
     </html>
   );
 }
+

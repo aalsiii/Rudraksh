@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -7,17 +8,17 @@ export default function HeroSection() {
       {/* Background image */}
       <Image
         src="/assets/images/home/hero-main.png"
-        alt="Rudraksha necklace"
+        alt="Original Nepali Rudraksha bead necklace and consecrated spiritual jewelry"
         fill
         className="object-cover object-center"
         priority
       />
       {/* Overlay */}
-      <div className="absolute inset-0" style={{ background: "rgba(85,41,18,0.3)" }} />
+      <div className="absolute inset-0" style={{ background: "rgba(85,41,18,0.35)" }} />
 
       {/* ── Text content — responsive position ── */}
       <div
-        className="absolute flex flex-col left-5 right-5 bottom-8 md:left-10 lg:left-12 lg:bottom-[100px] lg:max-w-[460px] xl:left-16 xl:bottom-[140px] xl:max-w-[686px] lg:right-auto z-10"
+        className="absolute flex flex-col left-5 right-5 bottom-8 md:left-10 lg:left-12 lg:bottom-[100px] lg:max-w-[480px] xl:left-16 xl:bottom-[140px] xl:max-w-[720px] lg:right-auto z-10"
         style={{ gap: "clamp(24px, 3vw, 40px)" }}
       >
         {/* Title + body */}
@@ -26,19 +27,19 @@ export default function HeroSection() {
             className="font-prata text-white"
             style={{ fontSize: "clamp(40px, 8vw, 72px)", lineHeight: "115%", letterSpacing: "-0.02em", margin: 0 }}
           >
-            Authenticity Meets Ancient Wisdom
+            Authentic Nepali Rudraksha & Vedic Gemstones
           </h1>
           <p
             className="font-lato text-white"
             style={{ fontSize: "clamp(15px, 4vw, 18px)", lineHeight: "160%", margin: 0, opacity: 0.95 }}
           >
-            Rudraksha and gemstones selected, verified, and prepared through time-honoured
-            Vedic practices to support balance, clarity, and inner alignment.
+            Original 1 to 21 Mukhi beads, Siddha Malas, and untreated astrological gemstones. Scientifically tested with X-ray certification and energized through sacred Prana Pratishtha on the banks of Maa Ganga.
           </p>
         </div>
 
-        {/* SHOP NOW */}
-        <div
+        {/* SHOP NOW - crawlable link */}
+        <Link
+          href="/products/category/rudraksha"
           className="flex items-center w-fit"
           style={{ gap: "4px", paddingBottom: "8px", borderBottom: "1px solid white" }}
         >
@@ -46,7 +47,7 @@ export default function HeroSection() {
             SHOP NOW
           </span>
           <Image src="/assets/icons/icon-shopnow-arrow.svg" alt="" width={20} height={20} />
-        </div>
+        </Link>
       </div>
 
       {/* ── Responsive Annotation Group — hidden on mobile ── */}

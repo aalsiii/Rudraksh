@@ -5,42 +5,48 @@ import { useState } from "react";
 const reviews = [
   {
     category: "5 MUKHI RUDRAKSHA",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    name: "Riya Shah",
+    quote:
+      "The Nepali 5 Mukhi bead has deeply defined natural grooves and reassuring physical weight. Wearing it has remarkably improved my focus during daily work and evening meditation.",
+    name: "Rohan Verma",
     location: "Mumbai",
     rating: 5,
   },
   {
     category: "7 MUKHI RUDRAKSHA BRACELET",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    name: "Riya Shah",
-    location: "Mumbai",
+    quote:
+      "Crafted with durable elastic and pure silver caps. It feels sturdy, elegant, and spiritually uplifting. Knowing it was energized on the banks of Ganga gives me immense peace of mind.",
+    name: "Priya Sundaram",
+    location: "Chennai",
     rating: 5,
   },
   {
     category: "GEMSTONES",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    name: "Riya Shah",
-    location: "Mumbai",
+    quote:
+      "The unheated Yellow Sapphire (Pukhraj) arrived with an accredited gemological certificate. The natural color saturation and optical clarity are outstanding for authentic astrological wear.",
+    name: "Arun Mathur",
+    location: "Jaipur",
     rating: 5,
   },
   {
     category: "INDRAKSHI MALA",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    name: "Riya Shah",
+    quote:
+      "An extraordinary spiritual investment. Each bead from 1 to 14 Mukhi is meticulously arranged and consecrated. The serene aura in our meditation space is truly tangible.",
+    name: "Meera Nambiar",
     location: "Delhi",
     rating: 5,
   },
   {
     category: "9 MUKHI RUDRAKSHA",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    quote:
+      "Associated with Navdurga, this 9 Mukhi Nepali bead helped me navigate career transitions with newfound courage and grounded determination. The verification card gave complete confidence.",
     name: "James Holloway",
     location: "London",
     rating: 5,
   },
   {
     category: "PANCHMUKHI MALA",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    quote:
+      "Traditional 108-bead japa mala with a strong Sumeru bead. Smooth between fingers, comfortable for daily mantra practice, and completely free of artificial chemical polishes.",
     name: "Ananya Krishnan",
     location: "Bangalore",
     rating: 5,

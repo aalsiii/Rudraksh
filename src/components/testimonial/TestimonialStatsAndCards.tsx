@@ -12,12 +12,42 @@ const stats = [
 
 /* ── Testimonials data ── */
 const testimonials = [
-  { name: "Riya Shah",      location: "Mumbai",    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-  { name: "James Holloway", location: "London",    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-  { name: "Ananya Krishnan", location: "Bangalore",quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-  { name: "Marco Ferretti", location: "Milan",     quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-  { name: "Fatima Al-Rashid",location: "Dubai",    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-  { name: "David Chen",     location: "Singapore", quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
+  {
+    name: "Riya Shah",
+    location: "Mumbai",
+    quote:
+      "The 7 Mukhi Rudraksha I ordered arrived with an official X-ray certificate and felt genuinely consecrated. Wearing it during meditation brought a palpable sense of grounding, emotional peace, and daily focus.",
+  },
+  {
+    name: "James Holloway",
+    location: "London",
+    quote:
+      "Finding authentic Nepali Rudraksha in the UK was challenging until I found Rudraksha Antiquei. The craftsmanship of my 5 Mukhi mala is exceptional, and their team answered all my questions patiently.",
+  },
+  {
+    name: "Ananya Krishnan",
+    location: "Bangalore",
+    quote:
+      "I was skeptical about buying sacred beads online, but the transparency here is unmatched. The free birth-chart consultation helped me select the exact Mukhi combination suited to my planetary chart.",
+  },
+  {
+    name: "Marco Ferretti",
+    location: "Milan",
+    quote:
+      "The Siddha Mala is truly a masterwork of sacred art. The energy, the natural grain of the beads, and the careful packaging from Rishikesh made the unboxing experience deeply uplifting and authentic.",
+  },
+  {
+    name: "Fatima Al-Rashid",
+    location: "Dubai",
+    quote:
+      "Superb quality and prompt international express shipping. The natural quartz Sphatik mala is crystal-clear and radiates a cooling, tranquil presence in my daily mindfulness practice.",
+  },
+  {
+    name: "David Chen",
+    location: "Singapore",
+    quote:
+      "Genuine Himalayan beads with documented verification. You can immediately feel the difference between synthetic commercial beads and these ethically sourced, energized Nepali specimens.",
+  },
 ];
 
 /*

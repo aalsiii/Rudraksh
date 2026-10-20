@@ -6,6 +6,7 @@ import { getRelatedProducts } from "@/lib/products";
 import BlogArticle from "@/components/blog/BlogArticle";
 import BlogSidebar from "@/components/blog/BlogSidebar";
 import RelatedArticles from "@/components/blog/RelatedArticles";
+import { buildPageMetadata, getBreadcrumbSchema, cleanText, SITE_URL, SITE_NAME } from "@/lib/seo";
 
 const BlogStillUnsure = dynamic(() => import("@/components/blog/BlogStillUnsure"));
 
@@ -16,22 +17,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
-  if (!blog) return {};
+  if (!blog) return { title: "Article Not Found" };
 
   const title = blog.metaTitle?.trim() || blog.title;
-  const description = blog.metaDescription?.trim() || blog.excerpt;
+  const description = cleanText(blog.metaDescription?.trim() || blog.excerpt, 155);
 
-  return {
+  return buildPageMetadata({
     title,
     description,
-    keywords: blog.tags,
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      images: blog.coverImage ? [{ url: blog.coverImage }] : undefined,
-    },
-  };
+    path: `/blog/${blog.slug}`,
+    keywords: blog.tags.length > 0 ? blog.tags : ["rudraksha guide", "vedic astrology"],
+    image: blog.coverImage || "/assets/images/og-default.webp",
+    type: "article",
+  });
 }
 
 export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -48,8 +46,51 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
     getRelatedBlogs(blog.id, blog.categoryId, 3),
   ]);
 
+  const authorName = blog.authorUser?.name ?? blog.author ?? "Rudraksha Antiquei Acharyas";
+
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    { name: blog.title, path: `/blog/${blog.slug}` },
+  ];
+  const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blog.title,
+    description: cleanText(blog.excerpt, 200),
+    image: blog.coverImage ? [blog.coverImage] : [`${SITE_URL}/assets/images/og-default.webp`],
+    datePublished: blog.publishedAt?.toISOString(),
+    dateModified: blog.updatedAt.toISOString(),
+    author: {
+      "@type": "Person",
+      name: authorName,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/assets/images/common/logo-25e94a.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/blog/${blog.slug}`,
+    },
+  };
+
   return (
     <div style={{ background: "#FEF9F2" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="h-px-section py-10 lg:py-14">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-10 lg:gap-14 items-start">
           <BlogArticle
@@ -57,7 +98,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
             excerpt={blog.excerpt}
             coverImage={blog.coverImage}
             coverImageAlt={blog.coverImageAlt}
-            author={blog.authorUser?.name ?? blog.author}
+            author={authorName}
             publishedAt={blog.publishedAt}
             readTimeMinutes={blog.readTimeMinutes}
             body={blog.body}
